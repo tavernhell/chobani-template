@@ -1,6 +1,20 @@
-.specialtext {
+.biggestText {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 5vw;
     font-weight: bolder;
     line-height: 110%;
+}
+
+body {
+    font-size: 2vw;
+}
+
+.biggerText {
+    font-size: 3vw;
+    font-weight: bolder;
+}
+
+.img-fluid.minsize {
+    width: 125px;
+    min-width: 100px;
 }
