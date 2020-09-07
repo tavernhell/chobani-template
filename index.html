@@ -5,14 +5,75 @@
   <meta charset="utf-8">
   <title>Chobani</title>
 
-  <!-- Material Design -->
-  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <!-- Bootstrap JS-->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-<p>Test</p>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex">
+        <a class="navbar-brand" href="#">Chobani</a>
+        <!-- iPad -->
+        <button class="navbar-toggler ml-auto" 
+                type="button" 
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+            <!-- ml-auto -> put toggle lines on right for iPad -->
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- iPad -->
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="row w-100">
+                <div class="col-lg-2"></div> <!-- to leave some space from the brand -->
+
+                <div class="col-lg-4 col-md-12">
+                    <!-- shortcuts -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#shop">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#help">Help</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-12">
+                    <!-- contacts -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="tel:+62123456789">+39123456789</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-1 ml-auto col-md-12">
+                    <!-- login && cart -->
+                    <ul class="navbar-nav w-100 d-flex justify-content-between">
+                        <li class="nav-item">
+                            <a class="nav-link">Login</a>
+                        </li>
+                        <li class="nav-item pt-2">
+                            <i class = "btn p-0 material-icons">shopping_cart</i>
+                        </li>
+                    </ul>
+                </div>
+            </div> <!-- row -->
+        </div>
+    </nav>
+
 </body>
 </html>
