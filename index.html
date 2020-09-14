@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="css/my-style.css">
 </head>
 
-<body class="bg-secondary">
+<body>
     <!-- Navbar -->
     <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex">
+    <nav class="navbar navbar-light navbar-expand-lg">
         <a class="navbar-brand" href="#">Chobani</a>
         <!-- iPad -->
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
@@ -78,56 +78,59 @@
 
     <!-- Main container -->
     <main>
-    <div class="container-fluid">
+    <div class="container-fluid p-0">
 
-        <div class="my-4"></div>
-
-        <!-- Special food && pic -->
-        <div class="d-flex flex-nowrap justify-content-center align-items-center">
+        <div id="firstBlock">
+            <!-- Special food && pic -->
+            <div class="d-flex  justify-content-center align-items-center">
                 <div class="px-2">
                     <span class="biggestText">Special food every time in our shop</span>
                     <div class="my-3"></div>
                     <div>
-                        We promise you'll enjoy every sweet moment. 
+                        We promise you'll enjoy every sweet moment.
                         <br>
                         Find your favorite food now, eat what you love and save some time for something cool!
                     </div>
                     <div class="my-3"></div>
-                    <button type="button" class="btn bg-warning text-white" href="#">Get started</button>
+                    <button type="button" class="btn" href="#">Get started</button>
                 </div>
-                <img src="./img/chirashi.jpg" class="img-fluid rounded" width="40%" alt="chirashi dish">
+                <img src="./img/big-bowl.png" class="img-fluid rounded" width="40%" alt="Bowl of food">
+            </div>
+            <!-- End of special food && pic -->
+
+            <div class="my-4"></div>
+
+            <!-- Our services -->
+            <div class="row">
+                <div class="col-10 mx-auto">
+                    <span class="biggerText">Our services</span>
+                    <div class="d-flex flex-nowrap justify-content-around mt-2">
+                        <div class="card-img-top d-flex align-items-center bg-white col-3 px-1">
+                            <div>
+                                <img class="img-fluid minsize" src="img/catering.png" alt="Catering">
+                            </div>
+                            <p class="p-2 m-0">Catering<br>Service</p>
+                        </div>
+                        <div class="card-img-top d-flex align-items-center bg-white col-3 px-1">
+                            <div>
+                                <img class="img-fluid minsize" src="img/booking.png" alt="Booking">
+                            </div>
+                            <p class="p-2 m-0">Online <br> Booking</p>
+                        </div>
+                        <div class="card-img-top d-flex align-items-center bg-white col-3 px-1">
+                            <div>
+                                <img class="img-fluid minsize" src="img/food-delivery.png" alt="Delivery">
+                            </div>
+                            <p class="p-2 m-0">Delivery<br>Service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-4"></div>
+            <!-- End of our services -->
+
         </div>
-        <!-- End of special food && pic -->
-
-        <div class="my-4"></div>
-
-        <!-- Our services -->
-        <div class="row">
-            <div class="col-10 mx-auto">
-                <span class="biggerText">Our services</span>
-                <div class="d-flex flex-nowrap justify-content-around mt-2">
-                    <div class="card-img-top d-flex align-items-center bg-white col-3 px-1">
-                        <div>
-                            <img class="img-fluid minsize" src="img/catering.png" alt="Catering">
-                        </div>
-                        <p class="p-2 m-0">Catering<br>Service</p>
-                    </div>
-                    <div class="card-img-top d-flex align-items-center bg-white col-3 px-1">
-                        <div>
-                            <img class="img-fluid minsize" src="img/booking.png" alt="Booking">
-                        </div>
-                        <p class="p-2 m-0">Online <br> Booking</p>
-                    </div>
-                    <div class="card-img-top d-flex align-items-center bg-white col-3 px-1">
-                        <div>
-                            <img class="img-fluid minsize" src="img/food-delivery.png" alt="Delivery">
-                        </div>
-                        <p class="p-2 m-0">Delivery<br>Service</p>
-                    </div>
-                </div>
-            </div>  
-        </div> 
-        <!-- End of our services -->
         
         <div class="separator"></div>
         
@@ -136,39 +139,40 @@
         <div class="row">
             <div class="col-10 mx-auto">
                 <span class="biggerText">Special menus</span>
+                <span id="circle"></span>
                 <br>
                 <span>Rice to everyone's liking</span>
                 <div class="d-flex flex-nowrap justify-content-around mt-2">
-                    <div class="card-img-top bg-white col-3 p-0">
+                    <div class="card-img-top bg-white col-3 p-0 shadow-lg">
                         <div>
-                            <img class="img-fluid" src="img/black-rice.jpg" alt="Black rice">
+                            <img class="img-fluid" src="img/thai-rice.png" alt="Thai rice">
                         </div>
                         <div class="card-body py-2 px-1">
-                            <p class="card-text"><b>Black rice w/ shrimps</b></p>
+                            <p class="card-text"><b>Thai rice</b></p>
                             <span class="d-flex justify-content-between">
                                 <span>&#11088;&#11088;&#11088;&#11088;&#11088;</span>
                                 <span>$ 19.99</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-img-top bg-white col-3 p-0">
+                    <div class="card-img-top bg-white col-3 p-0 shadow-lg">
                         <div>
-                            <img class="img-fluid" src="img/curcuma-rice.jpg" alt="Curcuma rice">
+                            <img class="img-fluid" src="img/indian-rice.png" alt="Indian rice">
                         </div>
                         <div class="card-body py-2 px-1">
-                            <p class="card-text"><b>Curcuma rice</b></p>
+                            <p class="card-text"><b>Indian rice</b></p>
                             <span class="d-flex justify-content-between">
                                 <span>&#11088;&#11088;&#11088;&#11088;</span>
                                 <span>$ 14.99</span>
                             </span>
                         </div>
                     </div>
-                    <div class="card-img-top bg-white col-3 p-0">
+                    <div class="card-img-top bg-white col-3 p-0 shadow-lg">
                         <div>
-                            <img class="img-fluid" src="img/rice-salad.jpg" alt="Rice salad">
+                            <img class="img-fluid" src="img/chinese-rice.png" alt="Chinese rice">
                         </div>
                         <div class="card-body py-2 px-1">
-                            <p class="card-text"><b>Rice salad</b></p>
+                            <p class="card-text"><b>Chinese rice</b></p>
                             <span class="d-flex justify-content-between">
                                 <span>&#11088;&#11088;&#11088;</span>
                                 <span>$ 9.99</span>
@@ -201,7 +205,7 @@
                         Find the best selection of curry and other traditional Indian dishes as well!
                     </div>
                     <div class="my-3"></div>
-                    <button type="button" class="btn bg-warning text-white" href="#">View more</button>
+                    <button type="button" class="btn" href="#">View more</button>
                 </div>
                 <img src="./img/curry.png" class="img-fluid rounded" width="37%" alt="chirashi dish">
             </div>
@@ -373,7 +377,7 @@
                 </div>
                 <div class="my-3"></div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-warning">Book now</button>
+                    <button type="submit" class="btn">Book now</button>
                 </div>
             </form>
         </div>

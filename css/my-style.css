@@ -1,16 +1,36 @@
+/* VARIABLES */
+:root {
+    --bg-col:#ffdb94;
+    --button-col: #ffae00;
+}
+
 /* TAGS */
+a, a:hover {
+    color: black;
+}
+
 body {
     font-size: 1.5vw;
     color: black;
+}
+
+header {
+    background-color: var(--bg-col);
 }
 
 footer {
     height: 100px;
 }
 
+button.btn {
+    background-color: var(--button-col)!important;
+    color: white!important;
+    font-weight: bold!important;
+}
+
+
 /* CLASSES */
 .biggestText {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 5vw;
     font-weight: bolder;
     line-height: 110%;
@@ -26,12 +46,12 @@ footer {
     min-width: 100px;
 }
 
-.separator {
-    height: 70px;
+.jumbotron {
+    background-color: var(--bg-col);
 }
 
-.special, .special:hover {
-    color: black;
+.separator {
+    height: 70px;
 }
 
 .text-center {
@@ -39,11 +59,30 @@ footer {
 }
 
 /* IDS */
-#reviewCarousel {
-    height: 250px;
+#firstBlock {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: var(--bg-col);
+    /* TL TR BR BL */
+    border-radius: 0px 0px 250px 75px;
 }
 
+#circle {
+    position: relative;
+    z-index: -2;
+    float: right;
+    width: 300px;
+    height: 300px;
+    clip-path: circle(50% at 100%);
+    background: lightblue;
+}
 
-.test {
-    height: fit-content;
+#circle2 {
+    background: #9e978e;
+    border-bottom-right-radius: 4vh;
+    border-top-right-radius: 4vh;
+}
+
+#reviewCarousel {
+    height: 250px;
 }
