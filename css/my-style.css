@@ -1,16 +1,16 @@
-/* VARIABLES */
+/*! VARIABLES */
 :root {
     --bg-col:#ffdb94;
     --button-col: #ffae00;
 }
 
-/* TAGS */
+/*! TAGS */
 a, a:hover {
     color: black;
 }
 
 body {
-    font-size: 1.5vw;
+    font-size: 1.5rem;
     color: black;
 }
 
@@ -29,15 +29,15 @@ button.btn {
 }
 
 
-/* CLASSES */
+/*! CLASSES */
 .biggestText {
-    font-size: 5vw;
+    font-size: 3rem;
     font-weight: bolder;
     line-height: 110%;
 }
 
 .biggerText {
-    font-size: 3vw;
+    font-size: 2rem;
     font-weight: bolder;
 }
 
@@ -50,6 +50,10 @@ button.btn {
     background-color: var(--bg-col);
 }
 
+.navbar * {
+    color: black!important;
+}
+
 .separator {
     height: 70px;
 }
@@ -58,29 +62,61 @@ button.btn {
     text-align: center!important;
 }
 
-/* IDS */
-#firstBlock {
-    padding-top: 50px;
-    padding-bottom: 50px;
+/*! IDS */
+
+/*? IMGS */
+/* Bowl of food */
+
+.image-container {
+    min-width: 400px;
+    width: 100%;
+}
+
+/* Above "Special food" */
+#leaf-abovespecial {
+    position: relative;
+    left: 10%;
+    width: 150px;
+    transform: rotate(100deg);
+}
+
+/* Left of "Special food" */
+#leaf-leftofspecial {
+    position: relative;
+    float: left;
+    top: 7cm;
+    left: 1%;
+}
+
+#leaf-nearcup {
+    position: relative;
+    float: right;
+    right: 35%;
+    top: -1cm;
+}
+
+/* Top right corner */
+#leaves-topright {
+    position: relative;
+    right: 5%;
+    float: right;
+    transform: rotate(40deg);
+}
+/*? END OF IMGS */
+
+#first-block {
+    position: relative;
+    /* padding-left: 100px; */
+    padding-bottom: 55px;
     background-color: var(--bg-col);
     /* TL TR BR BL */
-    border-radius: 0px 0px 250px 75px;
+    border-radius: 0% 0% 145% 70% / 0% 0% 190% 30%;
 }
 
-#circle {
-    position: relative;
-    z-index: -2;
-    float: right;
-    width: 300px;
-    height: 300px;
-    clip-path: circle(50% at 100%);
-    background: lightblue;
-}
-
-#circle2 {
-    background: #9e978e;
-    border-bottom-right-radius: 4vh;
-    border-top-right-radius: 4vh;
+#specialfood-content {
+    width: 90%;
+    padding-left: 3%;
+    margin: 0 auto;
 }
 
 #reviewCarousel {
