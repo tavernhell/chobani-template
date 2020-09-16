@@ -26,18 +26,26 @@ html {
 }
 
 
-footer {
-    height: 100px;
-}
-
 button.btn {
     background-color: var(--button-col)!important;
     color: white!important;
     font-weight: bold!important;
 }
 
+footer {
+    /* background-image: url('../img/waves.svg'); */
+    background-image: url('../img/footer-bg.png');
+    background-size: cover;
+    /* TL TR BR BL */
+    height: 300px;
+}
+
 
 /*! CLASSES */
+.bold {
+    font-weight: bold;
+}
+
 .biggestText {
     font-size: 3rem;
     font-weight: bolder;
@@ -55,6 +63,7 @@ button.btn {
 .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")!important;
 }
+
 
 /*? CIRCLES  */
 
@@ -156,6 +165,10 @@ button.btn {
     text-align: center!important;
 }
 
+.social:hover {
+    text-decoration: none;
+}
+
 /*! IDS */
 
 /*? IMGS */
@@ -238,7 +251,6 @@ button.btn {
 
 #first-block {
     position: relative;
-    /* padding-left: 100px; */
     padding-bottom: 55px;
     background-color: var(--bg-col);
     /* TL TR BR BL */
