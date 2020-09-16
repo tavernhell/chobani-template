@@ -1,7 +1,8 @@
 /*! VARIABLES */
 :root {
     --bg-col:#ffdb94;
-    --button-col: #ffae00;
+    --button-col-rgb: 255, 145, 0;
+    --button-col: #ff9100;
 }
 
 /*! TAGS */
@@ -12,11 +13,18 @@ a, a:hover {
 body {
     font-size: 1.5rem;
     color: black;
+    background-color: #efebdd;
+    overflow-x: hidden;
 }
 
 header {
     background-color: var(--bg-col);
 }
+
+html {
+    overflow-x: hidden;
+}
+
 
 footer {
     height: 100px;
@@ -41,9 +49,91 @@ button.btn {
     font-weight: bolder;
 }
 
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E")!important;
+}
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")!important;
+}
+
+/*? CIRCLES  */
+
+.bg-container {
+    position: relative;
+    z-index: -1;
+}
+
+.circle {
+    width: 560px;
+    height: 560px;
+    background-image: linear-gradient(150deg, var(--bg-col) 20%, #ffd59c14 100%);
+    border-radius: 50%;
+    position: absolute;
+}
+
+.circle-border {
+    width: 560px;
+    height: 560px;
+    border-radius: 50%;
+    border: solid var(--button-col) 1px;
+    position: absolute;
+    top: -30px;
+}
+
+.circle.mini {
+    width: 200px;
+    height: 200px;
+    background-image: linear-gradient(150deg, var(--bg-col) 20%, #ffd59c14 100%);
+    border-radius: 50%;
+    position: absolute;
+}
+
+.circle-border.mini {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: solid var(--button-col) 1px;
+    position: absolute;
+    top: -30px;
+}
+
+.right {
+    right: -280px;
+}
+.left {
+    left: -280px;
+}
+
+.right.mini {
+    right: -50px;
+    top: -70px;
+}
+
+.circle-border.right.mini {
+    right: 30px;
+    top: 30px;
+    border-color: rgba(var(--button-col-rgb),0.5);
+}
+
+.circle.left {
+    top: -70px;
+}
+
+.circle-border.left {
+    top: -100px;
+    border-color: rgba(var(--button-col-rgb),0.5);
+}
+/*? END OF CIRCLES */
+
 .img-fluid.minsize {
     width: 125px;
     min-width: 100px;
+}
+
+.image-container {
+    width: 100%;
+    min-width: 400px;
+    position: relative;
 }
 
 .jumbotron {
@@ -51,7 +141,11 @@ button.btn {
 }
 
 .navbar * {
-    color: black!important;
+    color: #666!important;
+}
+
+.rating {
+    font-size: 1rem;
 }
 
 .separator {
@@ -65,11 +159,11 @@ button.btn {
 /*! IDS */
 
 /*? IMGS */
-/* Bowl of food */
-
-.image-container {
-    min-width: 400px;
-    width: 100%;
+/* Under the circle of "All about chobani" */
+#bigleaf-about {
+    position: absolute;
+    top: 400px;
+    transform: rotate(270deg);
 }
 
 /* Above "Special food" */
@@ -80,19 +174,30 @@ button.btn {
     transform: rotate(100deg);
 }
 
-/* Left of "Special food" */
-#leaf-leftofspecial {
-    position: relative;
+/* Left of jumbotron */
+#leaf-leftofjumbo {
     float: left;
-    top: 7cm;
-    left: 1%;
+    position: absolute;
+    left: -140px;
+    top: 150px;
+    z-index: -1;
+    width: 150px;
+    transform: rotate(30deg);
 }
 
+/* Left of "Special food" */
+#leaf-leftofspecial {
+    position: absolute;
+    float: left;
+    left: -70px;
+    top: 30px;
+}
+
+/* Near cup */
 #leaf-nearcup {
-    position: relative;
-    float: right;
-    right: 35%;
-    top: -1cm;
+    position: absolute;
+    right: 300px;
+    top: 300px;
 }
 
 /* Top right corner */
@@ -102,6 +207,33 @@ button.btn {
     float: right;
     transform: rotate(40deg);
 }
+
+#jumbo-table {
+    position: absolute;
+    float: right;
+    right: -200px;
+    opacity: 10%;
+}
+
+/* Soup next to reviews */
+#soup-right {
+    position: absolute;
+    float: right;
+    right: -210px;
+    top: -100px;
+    z-index: -1;
+    filter: drop-shadow(15px 15px 15px #666);
+}
+
+#soup-left {
+    position: absolute;
+    float: left;
+    left: -210px;
+    top: -100px;
+    z-index: -1;
+    filter: drop-shadow(15px 15px 15px #666);
+}
+
 /*? END OF IMGS */
 
 #first-block {
@@ -113,12 +245,16 @@ button.btn {
     border-radius: 0% 0% 145% 70% / 0% 0% 190% 30%;
 }
 
+#order-jumbo {
+    position: relative;
+    margin: auto 10%;
+}
+
 #specialfood-content {
-    width: 90%;
-    padding-left: 3%;
-    margin: 0 auto;
+    position: relative;
+    margin: auto 75px;
 }
 
 #reviewCarousel {
-    height: 250px;
+    height: 400px;
 }
