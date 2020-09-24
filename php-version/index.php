@@ -390,7 +390,7 @@
             <!-- PRICE -->
             <div class='form-group'>
               <label for='Price' class='w-100 text-center'>Price</label>
-              <div class='input-group' id='price-inputgroup'>
+              <div class='input-group w-150px'>
                 <div class='input-group-prepend'>
                   <span class='input-group-text'>
                     <i class='material-icons'>attach_money</i>
@@ -506,10 +506,13 @@
             <p class='text-center biggerText'>
               Your cart:
             </p>
-            <div class='row d-flex justify-content-around' id='order-recap' >
+            <div class='row' id='order-recap' >
             </div>
           </div>
           <div class='my-3'></div>
+          <p class='text-center biggerText'>
+            Done adding? Book your order!
+          </p>
           <div class='row d-flex justify-content-around'>
             <!-- DATE -->
             <div class='form-group'>
@@ -533,6 +536,18 @@
                   </span>
                 </div>
                 <input required type='time' class='form-control' name='time' id='time'>
+              </div>
+            </div>
+            <!-- TOTALPRICE -->
+            <div class='form-group'>
+              <label for='total-price' class='w-100 text-center'>Total price</label>
+              <div class='input-group'>
+                <div class='input-group-prepend'>
+                  <span class='input-group-text'>
+                    <i class='material-icons'>attach_money</i>
+                  </span>
+                </div>
+                <input disabled type='number' class='form-control text-center' name='total-price' id='total-price'>
               </div>
             </div>
           </div>

@@ -6,46 +6,125 @@ function setAttributes (el, attrs) {
 }
 
 //############################## CART/ORDER FUNCTIONS ###################################
-function addToCart () {
-  let menuId = menuIdElem.value;
-  debugger;
-  let elemId = "";
-  let elemValue = "";
+function createMenuNameFormGroup (menuIdentifier) {
+  const menuId = "menu"+menuIdentifier;
+  const menuValue = menuDDL.options[menuDDL.selectedIndex].value;
 
-  //show order jumbotron
-  const orderJumbo = document.getElementById("order-jumbo");
-  orderJumbo.classList.remove("d-none");
-
-  //add menu to cart
-  const orderRecapDiv = document.getElementById("order-recap");
-
-  //### MENU NAME ###
-  elemId = "menu"+menuId;
-  elemValue = menuDDL.options[menuDDL.selectedIndex].value;
   //<div class="form-group"></div>
   const menuNameFormGroup = document.createElement("div");
   menuNameFormGroup.classList.add("form-group");
   
   //<label for="menu1,2,3 etc" class="w-100 text-center">Menu</label>
-  const menuLabel = document.createElement("label");
-  menuLabel.setAttribute("for",elemId);
-  menuLabel.classList.add("w-100","text-center");
-  menuLabel.textContent = "Menu";
+  const menuNameLabel = document.createElement("label");
+  menuNameLabel.setAttribute("for",menuId);
+  menuNameLabel.classList.add("w-100","text-center");
+  menuNameLabel.textContent = "Menu";
 
   //<input disabled="true" id="menu1,2,3 etc" type="text" class="form-control">Menu1,2,3 etc</input>
   const menuNameInput = document.createElement("input");
   setAttributes(menuNameInput, {
     'disabled':true,
-    'id':elemId,
+    'id':menuId,
     'type':'text'
   });
-  menuNameInput.classList.add('form-control');
-  menuNameInput.value = elemValue;
+  menuNameInput.classList.add("form-control","text-center");
+  menuNameInput.value = menuValue;
 
-  //append label and input to menuNameFormGroup and it to orderRecapDiv
-  menuNameFormGroup.appendChild(menuLabel);
+  //append label and input to menuNameFormGroup
+  menuNameFormGroup.appendChild(menuNameLabel);
   menuNameFormGroup.appendChild(menuNameInput);
-  orderRecapDiv.appendChild(menuNameFormGroup);
+
+  return menuNameFormGroup;
+}
+
+function createMenuAmountFormGroup (menuIdentifier) {
+  const amountId = "amount"+menuIdentifier;
+  const amountValue = amountElem.value;
+
+  //<div class="form-group"></div>
+  const menuAmountFormGroup = document.createElement("div");
+  menuAmountFormGroup.classList.add("form-group","w-100px");
+
+  //<label for="amount1,2,3 etc" class="w-100 text-center">Amount</label>
+  const menuAmountLabel = document.createElement("label");
+  menuAmountLabel.setAttribute("for",amountId);
+  menuAmountLabel.classList.add("w-100","text-center");
+  menuAmountLabel.textContent = "Amount";
+
+  //<input disabled="true" id="amount1,2,3 etc" type="text" class="form-control">Amount1,2,3 etc</input>
+  const menuAmountInput = document.createElement("input");
+  setAttributes(menuAmountInput, {
+    'disabled':true,
+    'id':amountId,
+    'type':'number'
+  });
+  menuAmountInput.classList.add("form-control","text-center");
+  menuAmountInput.value = amountValue;
+
+  //append label and input to menuAmountFormGroup
+  menuAmountFormGroup.appendChild(menuAmountLabel);
+  menuAmountFormGroup.appendChild(menuAmountInput);
+
+  return menuAmountFormGroup;
+}
+
+function createMenuPriceFormGroup (menuIdentifier) {
+  const priceId = "price"+menuIdentifier;
+  const priceValue = price.value;
+
+  //<div class="form-group"></div>
+  const menuPriceFormGroup = document.createElement("div");
+  menuPriceFormGroup.classList.add("form-group","w-150px");
+
+  //<label for="price1,2,3 etc" class="w-100 text-center">Price</label>
+  const menuPriceLabel = document.createElement("label");
+  menuPriceLabel.setAttribute("for",priceId);
+  menuPriceLabel.classList.add("w-100","text-center");
+  menuPriceLabel.textContent = "Price";
+
+  //<input disabled="true" id="price1,2,3 etc" type="text" class="form-control">Price1,2,3 etc</input>
+  const menuPriceInput = document.createElement("input");
+  setAttributes(menuPriceInput, {
+    'disabled':true,
+    'id':priceId,
+    'type':'number'
+  });
+  menuPriceInput.classList.add("form-control","text-center");
+  menuPriceInput.value = priceValue;
+
+  //append label and input to menuPriceFormGroup
+  menuPriceFormGroup.appendChild(menuPriceLabel);
+  menuPriceFormGroup.appendChild(menuPriceInput);
+  
+  return menuPriceFormGroup;
+}
+
+function addToCart () {
+  const menuId = menuIdElem.value;
+
+  //show order jumbotron
+  const orderJumbo = document.getElementById("order-jumbo");
+  orderJumbo.classList.remove("d-none");
+
+  //create div for ordered menu
+  const orderRecapDiv = document.getElementById("order-recap");
+  const orderedMenuContainer = document.createElement("div");
+  orderedMenuContainer.classList.add("col-11", "d-flex", "justify-content-around", "mx-auto")
+
+  //create form groups that'll contain menus info
+  const menuNameFormGroup = createMenuNameFormGroup(menuId); //menu name
+  const menuAmountFormGroup = createMenuAmountFormGroup(menuId); //menu amount
+  const menuPriceFormGroup = createMenuPriceFormGroup(menuId); //menu price
+
+  //append the form groups to orderedMenuContainer
+  orderedMenuContainer.appendChild(menuNameFormGroup);
+  orderedMenuContainer.appendChild(menuAmountFormGroup);
+  orderedMenuContainer.appendChild(menuPriceFormGroup);
+
+  //append orderedMenuContainer to orderRecapDiv
+  orderRecapDiv.appendChild(orderedMenuContainer);
+
+  calculateTotalPrice();
 }
 
 //############################## DATE/HOUR FUNCTIONS ###################################
@@ -53,9 +132,9 @@ function getInputDateFormat(date) {
   return date.toISOString().slice(0,10); //yyyy-mm-dd
 }
 
-function initialHourValue() {
-  const validTime = getCurrentTime();
-  timeElem.setAttribute('value',validTime);
+function setInitialTime() {
+  const currentTime = getCurrentTime();
+  timeElem.value = currentTime;
 }
 
 function getCurrentTime() {
@@ -86,10 +165,10 @@ function validDate() {
 
 //set initial value of #hour
 function validHour() {
-  const validTime = getCurrentTime();
+  const currentTime = getCurrentTime();
   //if the chosen date is today's date the minumum time should be the actual one
   if (dateElem.value == dateElem.min) {
-    timeElem.min = validTime;
+    timeElem.min = currentTime;
   }
   //else the user can choose any date
   else {
@@ -102,17 +181,25 @@ function calculatePrice () {
   const priceInput = document.getElementById("price");
   //get price of currenlty selected menu
   const price = menuDDL.options[menuDDL.selectedIndex].dataset.price; //.dataset.price same as .getAttribute('data-price');
-  const amount = document.getElementById("amount").value; //value is the property not the HTML attribute!
-  //console.log(price);
+  const amount = amountElem.value; //value is the property not the HTML attribute!
   //set price
   priceInput.value = (price*amount).toFixed(2);
 }
 
+function calculateTotalPrice() {
+  const selector = "#order-recap-container [id^='price']";
+  //populate prices with the values of menu prices
+  const prices = Array.from(document.querySelectorAll(selector)).map(el => Number(el.value));
+  //sums every value to totalPrice and add 10 to it if it's <= 49.99
+  let totalPrice = prices.reduce((a,b) => a+b);
+  if(totalPrice <= 49.99) { totalPrice += 10; }
+  totalPriceElem.value = totalPrice.toFixed(2);
+}
+
 function validAmount() {
-  const amount = document.getElementById("amount");
-  const maxAmount = amount.max;
-  if (amount.value == "") { amount.value = 1;  }
-  if (amount.value > maxAmount) { amount.value = maxAmount;  } 
+  const maxAmount = amountElem.max;
+  if (amountElem.value == "") { amountElem.value = 1;  }
+  if (amountElem.value > maxAmount) { amountElem.value = maxAmount;  } 
   calculatePrice();
 }
 
@@ -145,17 +232,19 @@ function setUserValues () {
 }
 
 //############################## GLOBAL VARIABLES ###################################
-const amount = document.getElementById("amount");
+const addToCartButton = document.getElementById("addcart-btn");
+const amountElem = document.getElementById("amount");
 const dateElem = document.getElementById("date");
-const timeElem = document.getElementById("time");
 const menuIdElem = document.getElementById("menu-id");
 const menuDDL = document.getElementById("menu-ddl");
-const addToCartButton = document.getElementById("addcart-btn")
 const orderButton = document.getElementById("order-btn");
+const timeElem = document.getElementById("time");
+const totalPriceElem = document.getElementById("total-price");
 const usersDDL = document.getElementById("users-ddl");
 
 //############################## ON PAGE LOAD ###################################
 calculatePrice();
+setInitialTime();
 setMenuId();
 setUserValues();
 validAmount();
@@ -163,7 +252,7 @@ validDate();
 validHour();
 
 //############################## EVENT LISTENERS ###################################
-//### DATE ###
+//### DATE/TIME ###
 dateElem.addEventListener("change", validHour, false); //validHour() would execute the function instead of calling it
 orderButton.addEventListener("click", validHour, false);
 
@@ -171,8 +260,8 @@ orderButton.addEventListener("click", validHour, false);
 addToCartButton.addEventListener("click", addToCart, false);
 
 //### PRICE ###
-amount.addEventListener("blur", validAmount, false);
-amount.addEventListener("keyup", calculatePrice, false);
+amountElem.addEventListener("blur", validAmount, false);
+amountElem.addEventListener("keyup", calculatePrice, false);
 menuDDL.addEventListener("change", calculatePrice, false);
 
 //### MENU ###

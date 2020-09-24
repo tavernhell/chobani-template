@@ -255,6 +255,14 @@ footer {
   text-align: center !important;
 }
 
+.w-150px {
+  width: 150px;
+}
+
+.w-100px {
+  width: 100px;
+}
+
 /*#endregion CLASSES*/
 
 /*#region IDS*/
@@ -330,10 +338,6 @@ footer {
 
 #order-btn {
   z-index: 2;
-}
-
-#price-inputgroup {
-  width: 150px
 }
 
 #reviewCarousel {
