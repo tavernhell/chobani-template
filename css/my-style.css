@@ -112,6 +112,7 @@ footer {
 .circle-right {
     right: -280px;
 }
+
 .circle-left {
     left: -280px;
 }
@@ -244,6 +245,7 @@ footer {
 /*#endregion CLASSES*/
 
 /*#region IDS*/
+
 /*#region LEAVES */
 /* Under the circle of "All about chobani" */
 #bigleaf-about {
@@ -306,7 +308,7 @@ footer {
 
 #order-jumbo {
     position: relative;
-    margin: auto 10%;
+    margin: auto 5%;
 }
 
 #reviewCarousel {
@@ -328,3 +330,16 @@ footer {
 }
 
 /*#endregion IDS */
+
+/*#region ACCESSIBILITY */
+/* Hide controls for number type input */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type=number] {
+	-webkit-appearance: textfield;
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+/*#endregion ACCESSIBILITY */

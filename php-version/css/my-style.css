@@ -1,0 +1,368 @@
+/* VARIABLES */
+:root {
+  --bg-col: #ffdb94;
+  --button-col-rgb: 255, 145, 0;
+  --button-col: #ff9100;
+}
+
+/*#region TAGS*/
+a,
+a:hover {
+  color: black;
+}
+
+body {
+  font-size: 1.5rem;
+  color: black;
+  background-color: #efebdd;
+  overflow-x: hidden;
+}
+
+header {
+  background-color: var(--bg-col);
+}
+
+html {
+  overflow-x: hidden;
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+button.btn {
+  background-color: var(--button-col) !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+footer {
+  background-image: url('../img/footer-bg.png');
+  background-size: cover;
+  height: 300px;
+}
+
+/*#endregion*/
+
+/*#region CLASSES*/
+.bold {
+  font-weight: bold;
+}
+
+.biggestText {
+  font-size: 3rem;
+  font-weight: bolder;
+  line-height: 110%;
+}
+
+.biggerText {
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-img {
+  width: 300px;
+  border-radius: 50%;
+}
+
+.card-img-top {
+  max-width: 500px !important;
+  margin: 3%;
+}
+
+/*#region CIRCLES*/
+.bg-container {
+  position: relative;
+  z-index: -1;
+}
+
+.circle {
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  background-image: linear-gradient(150deg, var(--bg-col) 20%, #ffd59c14 100%);
+  border-radius: 50%;
+}
+
+.circle-border {
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  border: solid var(--button-col) 1px;
+  top: -30px;
+}
+
+.circle.circle-mini {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: linear-gradient(150deg, var(--bg-col) 20%, #ffd59c14 100%);
+  border-radius: 50%;
+}
+
+.circle-border.circle-mini {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: solid var(--button-col) 1px;
+  top: -30px;
+}
+
+.circle-right {
+  right: -280px;
+}
+
+.circle-left {
+  left: -280px;
+}
+
+.circle-right.circle-mini {
+  right: -50px;
+  top: -70px;
+}
+
+.circle-border.circle-right.circle-mini {
+  right: 30px;
+  top: 30px;
+  border-color: rgba(var(--button-col-rgb), 0.5);
+}
+
+.circle.circle-left {
+  top: -70px;
+}
+
+.circle-border.circle-left {
+  top: -100px;
+  border-color: rgba(var(--button-col-rgb), 0.5);
+}
+
+/*#endregion CIRCLES*/
+
+/*#region IMAGES*/
+
+/* #region CURRYPICS */
+.curry1 {
+  width: 300px;
+  height: 300px;
+  background-image: url('../img/curry1.png');
+}
+
+.curry2 {
+  width: 200px;
+  height: 230px;
+  background-image: url('../img/curry2.png');
+}
+
+.curry3 {
+  width: 250px;
+  height: 200px;
+  background-image: url('../img/curry3.png');
+}
+
+.curry4 {
+  width: 150px;
+  height: 200px;
+  background-image: url('../img/curry4.png');
+}
+
+.radius-bltr {
+  border-radius: 0px 80px 0px 80px;
+}
+
+.radius-brtl {
+  border-radius: 80px 0px 80px 0px;
+}
+
+/* #endregion CURRYPICS */
+
+.menu-img {
+  width: 250px;
+}
+
+.img-container {
+  position: relative;
+  min-width: 400px;
+}
+
+.img-fluid.minsize {
+  width: 125px;
+  min-width: 100px;
+}
+
+.img-frame {
+  background-position: center;
+  filter: drop-shadow(15px 15px 25px #acacac);
+  margin: 30px 20px;
+}
+
+.social-img {
+  width: 20px;
+}
+
+/* Soup next to reviews */
+.soup {
+  position: absolute;
+  width: 420px;
+  top: -100px;
+  z-index: -1;
+  filter: drop-shadow(15px 15px 15px #666);
+}
+
+.soup-right {
+  float: right;
+  right: -210px;
+}
+
+.soup-left {
+  float: left;
+  left: -210px;
+}
+
+/*#endregion IMAGES*/
+
+.jumbotron {
+  background-color: var(--bg-col);
+}
+
+.navbar * {
+  color: #666 !important;
+}
+
+.rating {
+  font-size: 1.5rem;
+}
+
+.separator {
+  height: 70px;
+}
+
+.social:hover {
+  text-decoration: none;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+/*#endregion CLASSES*/
+
+/*#region IDS*/
+
+/*#region LEAVES */
+/* Under the circle of "All about chobani" */
+#bigleaf-about {
+  position: absolute;
+  top: 400px;
+  transform: rotate(270deg);
+}
+
+/* Above "Special food" */
+#leaf-abovespecial {
+  position: relative;
+  bottom: 10px;
+  right: 30px;
+  width: 150px;
+  transform: rotate(100deg);
+}
+
+/* Left of jumbotron */
+#leaf-leftofjumbo {
+  float: left;
+  position: absolute;
+  left: -170px;
+  top: 150px;
+  z-index: -1;
+  width: 150px;
+  transform: rotate(30deg);
+}
+
+/* Left of "Special food" */
+#leaf-leftofspecial {
+  position: relative;
+  float: left;
+  left: -90px;
+  top: 150px;
+}
+
+/* Top right corner */
+#leaves-topright {
+  position: relative;
+  float: right;
+  right: 50px;
+  transform: rotate(40deg);
+}
+
+/*#endregion LEAVES */
+
+#jumbo-table {
+  position: absolute;
+  float: right;
+  right: -200px;
+  opacity: 10%;
+  z-index: -1;
+}
+
+#first-block {
+  position: relative;
+  padding-bottom: 55px;
+  background-color: var(--bg-col);
+  /* Custom border */
+  border-radius: 0% 0% 145% 70% / 0% 0% 190% 30%;
+}
+
+#order-jumbo, #cart-jumbo {
+  position: relative;
+  margin: auto 5%;
+  z-index: 0;
+}
+
+
+#order-btn {
+  z-index: 2;
+}
+
+#price-inputgroup {
+  width: 150px
+}
+
+#reviewCarousel {
+  height: 400px;
+}
+
+#specialfood-content {
+  position: relative;
+  margin: 0 auto;
+}
+
+#specialfood-text {
+  position: relative;
+  margin: 0 5%;
+}
+
+/*#endregion IDS */
+
+/*#region ACCESSIBILITY */
+/* Hide controls for number type input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/*#endregion ACCESSIBILITY */
