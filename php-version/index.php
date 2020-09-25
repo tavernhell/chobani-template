@@ -1,7 +1,6 @@
 <!-- REQUIRE STATEMENTS && CONNECTION TO THE DB -->
 <?php 
-  require('php/db-config.php');
-  require('php/functions.php');
+  require('pages/db-config.php');
   
   //connecting to DB
   try {
@@ -53,9 +52,14 @@
     <nav class='navbar navbar-light navbar-expand-lg'>
       <a class='navbar-brand' href='#'>Chobani</a>
       <!-- iPad -->
-      <button class='navbar-toggler ml-auto' type='button' data-toggle='collapse' data-target='#navbarSupportedContent'
-        aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
-        <!-- ml-auto -> put toggle lines on right for iPad -->
+      <button class='navbar-toggler ml-auto' 
+              type='button' 
+              data-toggle='collapse' 
+              data-target='#navbarSupportedContent'
+              aria-controls='navbarSupportedContent' 
+              aria-expanded='false' 
+              aria-label='Toggle navigation'
+      > <!-- ml-auto -> put toggle lines on right for iPad -->
         <span class='navbar-toggler-icon'></span>
       </button>
       <!-- iPad -->
@@ -68,13 +72,13 @@
             <!-- shortcuts -->
             <ul class='navbar-nav'>
               <li class='nav-item'>
-                <a class='nav-link' href='#shop'>Shop</a>
+                <a class='nav-link' href='#cart-jumbo'>Shop</a>
               </li>
               <li class='nav-item'>
                 <a class='nav-link' href='#about'>About</a>
               </li>
               <li class='nav-item'>
-                <a class='nav-link' href='#help'>Help</a>
+                <a class='nav-link' href='#contacts'>Contacts</a>
               </li>
             </ul>
           </div>
@@ -209,7 +213,7 @@
       </div>
 
       <!-- All about Chobani -->
-      <div class='row'>
+      <div class='row' id='about'>
         <div class='col-10 mx-auto d-flex flex-nowrap justify-content-center align-items-center'>
           <div class='px-2'>
             <p class='biggerText'>
@@ -295,15 +299,15 @@
       <div id='reviewCarousel' class='carousel slide w-75 mx-auto' data-interval='false'>
         <!-- Carousel body -->
         <div class='carousel-inner h-100 d-flex align-items-center'>
-          <?php 
-            //var inizialization
+          <?php
             $i = 0; 
             $ext = $class = '';
             //query + cycle
             $stm = "SELECT user_id, first_name as name, review, profile_pic as pic
-                    FROM users 
-                    WHERE review IS NOT NULL 
+                    FROM users
+                    WHERE review IS NOT NULL
                     ORDER BY RAND() LIMIT 4";
+            //safe to use query since data is taken from DB
             foreach ($conn->query($stm) as $user) {
               //determine class and ext values
               $class = ($i == 0) ? 'active' : '';
@@ -396,7 +400,7 @@
                     <i class='material-icons'>attach_money</i>
                   </span>
                 </div>
-                <input type='number' disabled class='form-control' name='price' id='price'>
+                <input type='number' disabled class='form-control bg-light' name='price' id='price'>
               </div>
             </div>
           </div>
@@ -426,7 +430,8 @@
           Select user: &nbsp;
           <select class='pr-2' id='users-ddl'>
             <?php 
-              $stm = "SELECT user_id, first_name, last_name, email, phone, address FROM users";
+              $stm = "SELECT user_id, first_name, last_name, email, phone, address 
+                      FROM users";
               $i = 0;
               foreach ($conn->query($stm) as $user) {
                 //use the first user as default value
@@ -445,11 +450,17 @@
           </select>
         </div>
         <div class='my-3'></div>
-        <form>
+        <form method='post'>
+          <?php
+            //generate random number and store it to $_SESSION to prevent data to be sent on refresh
+            $rand = rand();
+            $_SESSION['rand']=$rand;
+          ?>
+          <input type="hidden" value="<?= $rand; ?>" name="randcheck" />
           <!-- PERSONAL SECTION -->
           <div class='row d-flex flex-sm-column flex-xl-row justify-content-around'>
             <!-- ID -->
-            <input type='number' class='d-none' id='user-id'>
+            <input type='number' class='d-none' id='user-id' name='user_id'>
             <!-- NAME -->
             <div class='form-group'>
               <label for='user-name' class='w-100 text-center'>Name</label>
@@ -502,11 +513,22 @@
           <!-- END OF PERSONAL SECTION -->
           <div class='my-3'></div>
           <!-- ORDER RECAP -->
-          <div id='order-recap-container'>
+          <div id='order-recap-container' class="row d-flex justify-content-center">
             <p class='text-center biggerText'>
               Your cart:
             </p>
-            <div class='row' id='order-recap' >
+            <div class='col-11 mx-auto'>
+              <table class='table table-striped text-center'>
+                <thead class='thead-dark'> 
+                  <tr>
+                    <th>Menu</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody id='order-recap'>
+                </tbody>
+              </table>
             </div>
           </div>
           <div class='my-3'></div>
@@ -539,7 +561,7 @@
               </div>
             </div>
             <!-- TOTALPRICE -->
-            <div class='form-group'>
+            <div class='form-group w-150px'>
               <label for='total-price' class='w-100 text-center'>Total price</label>
               <div class='input-group'>
                 <div class='input-group-prepend'>
@@ -547,7 +569,7 @@
                     <i class='material-icons'>attach_money</i>
                   </span>
                 </div>
-                <input disabled type='number' class='form-control text-center' name='total-price' id='total-price'>
+                <input readonly='readonly' type='number' class='form-control text-center' name='total_price' id='total-price'>
               </div>
             </div>
           </div>
@@ -561,6 +583,37 @@
         </form>
       </div>
       <!-- End of jumbotron order -->
+
+      <?php
+        // ############################ FORM VALUES RETRIEVE AND DB INSERTION ############################
+        if (!empty($_POST)) { //page has been called after user sent form data via POST request
+          if ($_POST['randcheck']==$_SESSION['rand']) {
+            //variables for insertion on orders table
+            $user_id = $_POST['user_id'];
+            $date = $_POST['date'];
+            $time = $_POST['time'];
+            $total_price = $_POST['total_price'];
+
+            //insert values in the orders table
+            $stm = $conn->prepare("INSERT INTO orders (user_id, order_date, order_time, order_price)
+                                              VALUES (?, ?, ?, ?)");
+            $stm->execute(array($user_id, $date, $time, $total_price));
+
+            //variables for insertion in meanus_orders table
+            //get the id of the last inserted order
+            $order_id = $conn->lastInsertId();
+            $menu_id_array = $_POST['menu_id'];
+            $menu_amount_array = $_POST['menu_amount'];
+            //both id and amount array will always have the same size
+            $ordered_menus = count($menu_id_array);
+            $stm = $conn->prepare("INSERT INTO menus_orders (order_id, menu_id, amount)
+                                                     VALUES (?, ?, ?)");
+            for ($i = 0; $i<$ordered_menus; $i++) { 
+              $stm->execute(array($order_id,$menu_id_array[$i],$menu_amount_array[$i]));
+            }
+          }
+        }
+      ?>
 
       <?php
       /*
@@ -668,7 +721,13 @@
   </main>
   <!-- End of main container -->
 
-  <div class='separator'></div>
+  <div class='separator'>
+    <div class='d-flex justify-content-center'>
+      <form action='pages/orders-list.php'>
+          <button type='submit' class='btn'>View orders list</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class='d-flex flex-wrap align-items-end'>
@@ -690,16 +749,14 @@
       <!-- END OF SOCIAL MEDIA LINKS -->
       <!-- NAVIGATION LINKS -->
       <div>
-        <a class='special' href='#'>Shop</a>
+        <a class='special' href='#cart-jumbo'>Shop</a>
         <br>
-        <a class='special' href='#'>About</a>
-        <br>
-        <a class='special' href='#'>Help</a>
+        <a class='special' href='#about'>About</a>
       </div>
       <!-- END OF NAVIGATION LINKS -->
       <!-- CONTACT US -->
       <div>
-        <address>
+        <address id='contacts'>
           <div>
             <strong>Contact us</strong>
           </div>
@@ -729,5 +786,4 @@
   </footer>
   <!-- End of footer -->
 </body>
-
 </html>

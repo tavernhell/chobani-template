@@ -6,125 +6,159 @@ function setAttributes (el, attrs) {
 }
 
 //############################## CART/ORDER FUNCTIONS ###################################
-function createMenuNameFormGroup (menuIdentifier) {
-  const menuId = "menu"+menuIdentifier;
-  const menuValue = menuDDL.options[menuDDL.selectedIndex].value;
+function addMenuToCart (menuId) {
+  //create div for ordered menu
+  const orderRecap = document.getElementById("order-recap");
+  const orderRecapTr = document.createElement("tr");
 
-  //<div class="form-group"></div>
-  const menuNameFormGroup = document.createElement("div");
-  menuNameFormGroup.classList.add("form-group");
-  
-  //<label for="menu1,2,3 etc" class="w-100 text-center">Menu</label>
-  const menuNameLabel = document.createElement("label");
-  menuNameLabel.setAttribute("for",menuId);
-  menuNameLabel.classList.add("w-100","text-center");
-  menuNameLabel.textContent = "Menu";
+  //create td that'll contain menus info
+  const menuIdTd = createMenuIdTd(menuId);
+  const menuNameTd = createMenuNameTd(menuId);
+  const menuAmountTd = createMenuAmountTd(menuId);
+  const menuPriceTd = createMenuPriceTd(menuId);
 
-  //<input disabled="true" id="menu1,2,3 etc" type="text" class="form-control">Menu1,2,3 etc</input>
-  const menuNameInput = document.createElement("input");
-  setAttributes(menuNameInput, {
-    'disabled':true,
-    'id':menuId,
-    'type':'text'
-  });
-  menuNameInput.classList.add("form-control","text-center");
-  menuNameInput.value = menuValue;
+  //append the form groups to orderedMenuContainer
+  orderRecapTr.appendChild(menuIdTd);
+  orderRecapTr.appendChild(menuNameTd);
+  orderRecapTr.appendChild(menuAmountTd);
+  orderRecapTr.appendChild(menuPriceTd);
 
-  //append label and input to menuNameFormGroup
-  menuNameFormGroup.appendChild(menuNameLabel);
-  menuNameFormGroup.appendChild(menuNameInput);
-
-  return menuNameFormGroup;
+  //append orderedMenuContainer to orderRecapDiv
+  orderRecap.appendChild(orderRecapTr);
 }
 
-function createMenuAmountFormGroup (menuIdentifier) {
-  const amountId = "amount"+menuIdentifier;
-  const amountValue = amountElem.value;
-
-  //<div class="form-group"></div>
-  const menuAmountFormGroup = document.createElement("div");
-  menuAmountFormGroup.classList.add("form-group","w-100px");
-
-  //<label for="amount1,2,3 etc" class="w-100 text-center">Amount</label>
-  const menuAmountLabel = document.createElement("label");
-  menuAmountLabel.setAttribute("for",amountId);
-  menuAmountLabel.classList.add("w-100","text-center");
-  menuAmountLabel.textContent = "Amount";
-
-  //<input disabled="true" id="amount1,2,3 etc" type="text" class="form-control">Amount1,2,3 etc</input>
-  const menuAmountInput = document.createElement("input");
-  setAttributes(menuAmountInput, {
-    'disabled':true,
-    'id':amountId,
-    'type':'number'
-  });
-  menuAmountInput.classList.add("form-control","text-center");
-  menuAmountInput.value = amountValue;
-
-  //append label and input to menuAmountFormGroup
-  menuAmountFormGroup.appendChild(menuAmountLabel);
-  menuAmountFormGroup.appendChild(menuAmountInput);
-
-  return menuAmountFormGroup;
-}
-
-function createMenuPriceFormGroup (menuIdentifier) {
-  const priceId = "price"+menuIdentifier;
-  const priceValue = price.value;
-
-  //<div class="form-group"></div>
-  const menuPriceFormGroup = document.createElement("div");
-  menuPriceFormGroup.classList.add("form-group","w-150px");
-
-  //<label for="price1,2,3 etc" class="w-100 text-center">Price</label>
-  const menuPriceLabel = document.createElement("label");
-  menuPriceLabel.setAttribute("for",priceId);
-  menuPriceLabel.classList.add("w-100","text-center");
-  menuPriceLabel.textContent = "Price";
-
-  //<input disabled="true" id="price1,2,3 etc" type="text" class="form-control">Price1,2,3 etc</input>
-  const menuPriceInput = document.createElement("input");
-  setAttributes(menuPriceInput, {
-    'disabled':true,
-    'id':priceId,
-    'type':'number'
-  });
-  menuPriceInput.classList.add("form-control","text-center");
-  menuPriceInput.value = priceValue;
-
-  //append label and input to menuPriceFormGroup
-  menuPriceFormGroup.appendChild(menuPriceLabel);
-  menuPriceFormGroup.appendChild(menuPriceInput);
-  
-  return menuPriceFormGroup;
-}
-
-function addToCart () {
-  const menuId = menuIdElem.value;
-
+function cartOperations () {
+  const menuId = parseInt(menuIdElem.value);
   //show order jumbotron
   const orderJumbo = document.getElementById("order-jumbo");
   orderJumbo.classList.remove("d-none");
-
-  //create div for ordered menu
-  const orderRecapDiv = document.getElementById("order-recap");
-  const orderedMenuContainer = document.createElement("div");
-  orderedMenuContainer.classList.add("col-11", "d-flex", "justify-content-around", "mx-auto")
-
-  //create form groups that'll contain menus info
-  const menuNameFormGroup = createMenuNameFormGroup(menuId); //menu name
-  const menuAmountFormGroup = createMenuAmountFormGroup(menuId); //menu amount
-  const menuPriceFormGroup = createMenuPriceFormGroup(menuId); //menu price
-
-  //append the form groups to orderedMenuContainer
-  orderedMenuContainer.appendChild(menuNameFormGroup);
-  orderedMenuContainer.appendChild(menuAmountFormGroup);
-  orderedMenuContainer.appendChild(menuPriceFormGroup);
-
-  //append orderedMenuContainer to orderRecapDiv
-  orderRecapDiv.appendChild(orderedMenuContainer);
-
+  //menu already in cart
+  if (menuInCart (menuId)) {
+    updateCart(menuId);
+  }
+  else {
+    addMenuToCart(menuId);
+  }
   calculateTotalPrice();
+}
+
+function createMenuAmountTd (id) {
+  const amountId = "amount"+id;
+  const amountValue = amountElem.value;
+
+  const menuAmountTd = document.createElement("td");
+  menuAmountTd.setAttribute("id",amountId);
+  menuAmountTd.textContent = amountValue;
+
+  const menuAmountTdInput = document.createElement("input");
+  menuAmountTdInput.classList.add("d-none");
+  menuAmountTdInput.setAttribute("name","menu_amount[]");
+  menuAmountTdInput.value = amountValue;
+  menuAmountTd.appendChild(menuAmountTdInput);
+
+  return menuAmountTd;
+}
+
+function createMenuIdTd (id) {
+  const identifierValue = menuDDL.options[menuDDL.selectedIndex].dataset.menuId; //from data-menu-id to menuId
+
+  const menuIdentifierTd = document.createElement("input");
+  menuIdentifierTd.classList.add("d-none");
+  //menu-id[] to be received as an array in PHP
+  menuIdentifierTd.setAttribute("name","menu_id[]");
+  menuIdentifierTd.value = identifierValue;
+
+  return menuIdentifierTd;
+}
+
+function createMenuNameTd (id) {
+  const menuId = "menu"+id;
+  const menuValue = menuDDL.options[menuDDL.selectedIndex].value;
+
+  const menuNameTd = document.createElement("td");
+  menuNameTd.setAttribute("id",menuId);
+  menuNameTd.textContent = menuValue;
+
+  const menuNameTdInput = document.createElement("input");
+  menuNameTdInput.classList.add("d-none");
+  menuNameTdInput.setAttribute("name","menu_name[]");
+  menuNameTdInput.value = menuValue;
+  menuNameTd.appendChild(menuNameTdInput);
+
+  return menuNameTd;
+}
+
+function createMenuPriceTd (id) {
+  const priceId = "price"+id;
+  const priceValue = priceElem.value;
+
+  const menuPriceTd = document.createElement("td");
+  menuPriceTd.setAttribute("id",priceId);
+  menuPriceTd.textContent = priceValue;
+
+  const menuPriceTdInput = document.createElement("input");
+  menuPriceTdInput.classList.add("d-none");
+  menuPriceTdInput.setAttribute("name","menu_price[]");
+  menuPriceTd.appendChild(menuPriceTdInput);
+
+  return menuPriceTd;
+}
+
+//returns a nodelist containing 
+function getMenuNodeList () {
+  const selector = "#order-recap [id^='menu']";
+  return document.querySelectorAll(selector);
+}
+
+function getMenuIdx (menuId) { 
+  const MenuNodeList = getMenuNodeList();
+  for(const [idx,menu] of MenuNodeList.entries()){
+    if (parseInt(menu.id.substr(4)) == menuId) {
+      return idx; //return index of the menu found
+    }
+  }
+}
+
+function menuInCart (menuId) {
+  const MenuNodeList = getMenuNodeList();
+  for(const menu of MenuNodeList){
+    //take the string, starting from the index 4, from id attribute of menu and parse it to string 
+                        //([0]m[1]e[2]n[3]u[4]1)
+    if (parseInt(menu.id.substr(4)) == menuId) {
+      return true; //menu1,2,3 etc was found
+    }
+  }
+  return false;
+}
+
+function updateCart (menuId) {
+  //amount
+  const amountId = "amount"+menuId;
+  const amountCell = document.getElementById(amountId);
+  const amountValue = parseInt(amountCell.textContent);
+  const currAmount = parseInt(amountElem.value);
+  const maxAmount = parseInt(amountElem.max);
+  const newAmount = amountValue+currAmount;
+
+  //price
+  const priceId = "price"+menuId;
+  const priceCell = document.getElementById(priceId);
+  const price = Number(menuDDL.options[menuId-1].dataset.price); //get the price of the menu (DDL indexes start from 0!)
+  
+  //user added x units and the total amount exceeds the max
+  if (newAmount>maxAmount) {
+    alert(`You can't order more than ${amountElem.max} units!`)
+    return;
+  }
+  //update the amount and the price in the cell
+  else {
+    //change the value of the first child (td elem) without affecting the input elem
+    amountCell.firstChild.nodeValue = newAmount;
+    const newPrice = Number(newAmount*price).toFixed(2);
+    priceCell.firstChild.nodeValue = newPrice;
+    //update amount value for hidden input inside the td
+    amountCell.lastChild.value = newAmount;
+  }
 }
 
 //############################## DATE/HOUR FUNCTIONS ###################################
@@ -137,14 +171,15 @@ function setInitialTime() {
   timeElem.value = currentTime;
 }
 
+//get current time
 function getCurrentTime() {
-    //get current time
-    const currentDate = new Date();
-    //appen '0' for single digits (to prevent 9:15, 17:7 etc)
-    const currentHour = ("0"+currentDate.getHours()).slice(-2);
-    const currentMin = ("0"+currentDate.getMinutes()).slice(-2);
-    const validTime = currentHour+':'+currentMin;
-    return validTime;
+  //get today's date
+  const currentDate = new Date();
+  //append '0' for single digits (to prevent 9:15, 17:7 etc)
+  const currentHour = ("0"+currentDate.getHours()).slice(-2);
+  const currentMin = ("0"+currentDate.getMinutes()).slice(-2);
+  const validTime = currentHour+':'+currentMin;
+  return validTime;
 }
 
 //sets initial value of #date, as well as min and max value for it
@@ -178,28 +213,29 @@ function validHour() {
 
 //############################## PRICE FUNCTIONS ###################################
 function calculatePrice () {
-  const priceInput = document.getElementById("price");
   //get price of currenlty selected menu
   const price = menuDDL.options[menuDDL.selectedIndex].dataset.price; //.dataset.price same as .getAttribute('data-price');
-  const amount = amountElem.value; //value is the property not the HTML attribute!
+  const amount = amountElem.value; //! value is the property not the HTML attribute!
   //set price
-  priceInput.value = (price*amount).toFixed(2);
+  priceElem.value = (price*amount).toFixed(2);
 }
 
 function calculateTotalPrice() {
-  const selector = "#order-recap-container [id^='price']";
+  const selector = "#order-recap [id^='price']";
   //populate prices with the values of menu prices
-  const prices = Array.from(document.querySelectorAll(selector)).map(el => Number(el.value));
+  const prices = Array.from(document.querySelectorAll(selector)).map(el => Number(el.textContent));
   //sums every value to totalPrice and add 10 to it if it's <= 49.99
   let totalPrice = prices.reduce((a,b) => a+b);
-  if(totalPrice <= 49.99) { totalPrice += 10; }
+  if(totalPrice <= 49.99) { 
+    totalPrice += 10; 
+  }
   totalPriceElem.value = totalPrice.toFixed(2);
 }
 
 function validAmount() {
   const maxAmount = amountElem.max;
-  if (amountElem.value == "") { amountElem.value = 1;  }
-  if (amountElem.value > maxAmount) { amountElem.value = maxAmount;  } 
+  if (amountElem.value == "" || Number(amountElem.value) <= 0) { amountElem.value = 1;  }
+  if (Number(amountElem.value) > maxAmount) { amountElem.value = maxAmount;  } 
   calculatePrice();
 }
 
@@ -238,6 +274,7 @@ const dateElem = document.getElementById("date");
 const menuIdElem = document.getElementById("menu-id");
 const menuDDL = document.getElementById("menu-ddl");
 const orderButton = document.getElementById("order-btn");
+const priceElem = document.getElementById("price");
 const timeElem = document.getElementById("time");
 const totalPriceElem = document.getElementById("total-price");
 const usersDDL = document.getElementById("users-ddl");
@@ -257,7 +294,7 @@ dateElem.addEventListener("change", validHour, false); //validHour() would execu
 orderButton.addEventListener("click", validHour, false);
 
 //### CART ###
-addToCartButton.addEventListener("click", addToCart, false);
+addToCartButton.addEventListener("click", cartOperations, false);
 
 //### PRICE ###
 amountElem.addEventListener("blur", validAmount, false);
